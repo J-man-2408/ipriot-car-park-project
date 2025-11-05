@@ -73,9 +73,9 @@ Notes on using this guide:
 **Additional evidencing:**
 Include a screenshot of your GitHub repository **after** you have pushed your initial commit.
 
-```markdown
-![Initial commit](images/image-of-github-repo-after-initial-push.jpg) 
-```
+
+![Initial commit](./images/image-of-github-repo-after-initial-push.png) 
+
 
 ### 2.2. Create a branch for your work
 
@@ -92,9 +92,9 @@ After reading the task requirements, you should be able to identify the classes,
 
 | Class Name | Attributes | Methods |
 | ---------- | ---------- | ------- |
-| `CarPark`    |            |         |
-| `Sensor`     |            |         |
-| `Display`    |            |         |
+| `CarPark`    | `name` = name of the carpark, `capacity` = total number of bays, `sensors` = list of Sensor objects, `license_plates` = list of string for storing plates, `display` = instance of Display class   | `add_car(license_plate)` = adds plates to list, `remove_car(license_plate)` = frees up bays, removes plates from list, `get_available_bays()` = returns number of bays available       |
+| `Sensor`     | `temperature` = float storing the current temperature, `car_plate_entry` = string for scanned plates entering (if any), `car_plate_exit` = string for scanned plates exiting (if any), `id` = unique id for the carpark sensor  | `detect_car_entry(car_plate_entry)` = scans the number plates of cars entering, `detect_car_exit(car_plate_exit)` = scans the number plates of cars exiting, `read_temp()` = the temperatures reading    | 
+| `Display`    | `message`  = current message being shown, `temp` = current temperature, `available_bays` = number of free bays    | `update_display(available_bays, temp)` = updates the display info, `show_announcement(message)` = show the arbitrary announcements   |
 
 **Additional evidencing:**
 Ensure you have completed the previous table and include at least two methods and attributes for each.
