@@ -6,7 +6,10 @@ class Display:
         
     def update(self, data):
         for key, value in data.items():
+            if key == "message":
+                self.message = value
             print(f"[Display {self.id}] {key}: {value}")
+
         
     def __str__ (self):
         return f"Display {self.id}: {self.message}"
