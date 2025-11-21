@@ -76,41 +76,52 @@ class CarPark:
             display.update(data)
                     
 # testing inputs
-if __name__ == "__main__":
-    from sensors import EntrySensor, ExitSensor
-    from display import Display
 
-    # Create car park
-    location = "Kalamunda"
-    capacity = 15
-    carpark = CarPark(location, capacity)
+from sensors import EntrySensor, ExitSensor
+from display import Display
+from car_park import CarPark
 
-    # Create sensors
-    entry = EntrySensor(id=1)
-    exit_ = ExitSensor(id=2)
+location = "Kalamunda"
+capacity = 5
+carpark = CarPark(location, capacity)
 
-    # Create displays
-    d1 = Display(id=101, message="Welcome!")
-    d2 = Display(id=102, message="Have a nice day!")
 
-    # Register sensors and displays
-    carpark.register(entry)
-    carpark.register(exit_)
-    carpark.register(d1)
-    carpark.register(d2)
+entry = EntrySensor(id=1)
+exit_ = ExitSensor(id=2)
 
-    # Check if sensors have bidirectional link
-    print(entry.car_park)   # Should print the CarPark object
-    print(exit_.car_park)   # Should print the CarPark object
 
-    # Check displays list
-    for d in carpark._display:
-        print(d)  # Should print display info
+d1 = Display(id=101)
+d2 = Display(id=102)
 
-    # Test add_car / remove_car
-    carpark.add_car("ABC123")
-    carpark.add_car("XYZ789")
-    print(carpark._plate)  # Should show the two plates
 
-    carpark.remove_car("ABC123")
-    print(carpark._plate)  # Should show only "XYZ789"
+carpark.register(entry)
+carpark.register(exit_)
+carpark.register(d1)
+carpark.register(d2)
+
+
+print("Checking sensors' car park references:")
+print(entry.car_park)  # Should show CarPark object
+print(exit_.car_park)  # Should show CarPark object
+print()
+
+print("Initial display states:")
+carpark.update_displays()
+print()
+
+print("Simulating vehicle entries:")
+for _ in range(3):
+    entry.detect_vehicle()
+print()
+
+
+print("Simulating vehicle exits:")
+for _ in range(2):
+    exit_.detect_vehicle()
+print()
+
+print("Final car park plates list:", carpark._plate)
+print("Final available bays:", carpark.available_bays)
+print("Final display states:")
+carpark.update_displays()
+
