@@ -34,7 +34,15 @@ class CarPark:
             
         elif isinstance(component, Display):
             self._display.append(component)
-            
+    @property
+    def plates(self):
+        return self._plate
+
+    @property
+    def displays(self):
+        return self._display
+
+       
     @property    
     def available_bays(self):
         """
@@ -58,10 +66,9 @@ class CarPark:
         self.update_displays()
         print (f"Car {plate} added. {self.available_bays} bays remaining.")
             
-    def remove_car (self, plate):
+    def remove_car(self, plate):
         if plate not in self._plate:
-            print ("Car was not found")
-            return
+            raise ValueError(f"Car {plate} was not found")
         
         self._plate.remove(plate)
         self.update_displays()
@@ -75,53 +82,3 @@ class CarPark:
         for display in self._display:
             display.update(data)
                     
-# testing inputs
-
-from sensors import EntrySensor, ExitSensor
-from display import Display
-from car_park import CarPark
-
-location = "Kalamunda"
-capacity = 5
-carpark = CarPark(location, capacity)
-
-
-entry = EntrySensor(id=1)
-exit_ = ExitSensor(id=2)
-
-
-d1 = Display(id=101)
-d2 = Display(id=102)
-
-
-carpark.register(entry)
-carpark.register(exit_)
-carpark.register(d1)
-carpark.register(d2)
-
-
-print("Checking sensors' car park references:")
-print(entry.car_park)  # Should show CarPark object
-print(exit_.car_park)  # Should show CarPark object
-print()
-
-print("Initial display states:")
-carpark.update_displays()
-print()
-
-print("Simulating vehicle entries:")
-for _ in range(3):
-    entry.detect_vehicle()
-print()
-
-
-print("Simulating vehicle exits:")
-for _ in range(2):
-    exit_.detect_vehicle()
-print()
-
-print("Final car park plates list:", carpark._plate)
-print("Final available bays:", carpark.available_bays)
-print("Final display states:")
-carpark.update_displays()
-
