@@ -371,31 +371,33 @@ When a car enters the car park, we record its plate number and update the displa
 2. Append the `plate` to the `plates` list (`self.plates.append(plate)`).
 3. Call the `update_displays` method.
    Hang on, we haven't implemented the `update_displays` method yet. We'll do that next.
-   Here is a sample implementation of the `add_car` method:
+      Here is a sample implementation of the `add_car` method:
 
-      ```python
-      # ... inside the CarPark class
-      def add_car(self, plate):
-         self.plates.append(plate)
-         self.update_displays()
-      ```
+            ```python
+                  # ... inside the CarPark class
+                        def add_car(self, plate):
+                                 self.plates.append(plate)
+                                          self.update_displays()
+                                                ```
 
-4. Repeat the previous steps to implement the `remove_car` method. This method also accepts a single parameter, `plate` and also calls `update_displays`. However, this method should remove the plate from `self.plates`.
+                                                4. Repeat the previous steps to implement the `remove_car` method. This method also accepts a single parameter, `plate` and also calls `update_displays`. However, this method should remove the plate from `self.plates`.
 
-#### 2.7.3. Update displays method
+                                                #### 2.7.3. Update displays method
 
-Finally, we are going to create the `update_displays` method. This method will iterate through the `displays` list and call the `update` method on each display. Before we proceed, consider, as a driver, what information you would like to see when you enter a car park.
+                                                Finally, we are going to create the `update_displays` method. This method will iterate through the `displays` list and call the `update` method on each display. Before we proceed, consider, as a driver, what information you would like to see when you enter a car park.
 
-For example, you may want to see the number of available bays, the current temperature, and the time.
+                                                For example, you may want to see the number of available bays, the current temperature, and the time.
 
 Now consider, between the `CarPark`, `Sensor`, and `Display` classes, which class is responsible for each piece of information? There's no right or wrong answer here. But you should be able to justify your answer.
 
 >Q. Which class is responsible for the number of available bays (and why)?
->
+   > The CarPark class because it owns the list of parked cars (`self._plate`) and nows the capacity (`self.capacity`)
+
 >Q. Which class is responsible for the current temperature (and why)?
->
+   > The Sensor class is responsible because temperature is measured by the sensor hardware. CarPark and Display show it but don't collect it. 
+
 >Q. Which class is responsible for the time (and why)?
->
+   > The CarPark is responsible for it as it will request the current time to show on the displays.
 --------
 
 ##### 2.7.3.1. Detour: implement available bays
