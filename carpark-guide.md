@@ -160,6 +160,7 @@ Include a screenshot of your GitHub repository `src/` directory **after** you ha
    git tag -a "s1" -m "Added a constructor and attributes to the car park class"
    ```
 
+<!-- Up to here 5/11 -->
 #### 2.5.2. Display class
 
 1. Create an `__init__` method for the `Display` class. This method will be called when creating a new `Display` object. The method should accept the following parameters:
