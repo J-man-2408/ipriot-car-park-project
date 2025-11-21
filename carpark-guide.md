@@ -470,27 +470,27 @@ This time, we will push the tag to the remote repository:
 
 Add a screenshot of the GitHub repository after pushing the tag, showing the CarPark class with the new methods:
 
-```markdown
-![Added methods to the car park class](screenshots/methods-to-car-park.png)
-```
+![Added methods to the car park class](/images/methods-to-car-park.png)
 
 Answer the following questions:
 > **Review Questions**
 >
 > 1. **Which class is responsible for each of the following pieces of information (and why)?**
 >    - *The number of available bays*
->      `Answer here...`
+>      `CarPark`
 >    - *The current temperature*
->      `Answer here...`
+>      `Sensor`
 >    - *The time*
->      `Answer here...`
+>      `CarPark`
 >
 > 2. **What is the difference between an attribute and a property?**
->    `Answer here...`
->
+   > An attribute is a variable that is stored directly on the object and can be read or changed directly 
+   > A property is a method decorated with `@property` that behaves like an attribute. It can compute its value dynamically and control access. 
 > 3. **Why do you think we used a dictionary to hold the data we passed the display? List at least one advantage and one disadvantage of this approach.**
->    `Answer here...`
+   > Advantage: It's flexible, any number of information pieces can be added or removed without changed the update method signature. 
+   > Disadvantage: Less structured, if keys are misspelled or wrong the displays may break and type checking becomes harder.  
 
+<!-- Up to here 21/11/2025 3.10 -->
 #### 2.7.5. Add a detect vehicle method to the Sensor class
 
 A sensor detects a vehicle, scans the plate, and notifies the car park. The Sensor class is specialized by the EntrySensor and ExitSensor classes. We will implement the `detect_vehicle` method in the `EntrySensor` and `ExitSensor` classes.
