@@ -34,27 +34,46 @@ class CarPark:
             
         elif isinstance(component, Display):
             self._display.append(component)
+            
+    @property    
+    def available_bays(self):
+        """
+        Returns the number of available bays in the car park. 
+        This is a derived value of the capacity minus number of parked cars
+        Never returns a negative number
+        """
+
+        return max(0, self.capacity - len(self._plate))
     
     def add_car(self, plate):
-        if plate not in self._plate:
-            if len (self._plate) < self.capacity:
-                self._plate.append(plate)
-                self.update_displays()
-            else: 
-                print("Car park is FULL!")
-        else: 
-            print("Car is already parked.")
+        if plate in self._plate:
+            print ("Car is already parked.")
+            return
+        
+        if len (self._plate) >= self.capacity:
+            print ("Car park is FULL!")
+            return
+        
+        self._plate.append(plate)
+        self.update_displays()
+        print (f"Car {plate} added. {self.available_bays} bays remaining.")
             
     def remove_car (self, plate):
-        if plate in self._plate:
-            self._plate.remove(plate)
-            self.update_displays()
-        else:
-            print ("Car was not found.")
+        if plate not in self._plate:
+            print ("Car was not found")
+            return
+        
+        self._plate.remove(plate)
+        self.update_displays()
+        print(f"Car {plate} removed. {self.available_bays} bays remaining.")
     
     def update_displays (self):
+        data = {
+            "available_bays": self.available_bays,
+            "temperature": 20 #CHANGE FOR SENSOR READING EVENTUALLY !!!
+        }
         for display in self._display:
-            display.update()
+            display.update(data)
                     
 # testing inputs
 if __name__ == "__main__":
