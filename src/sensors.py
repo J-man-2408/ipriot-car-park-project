@@ -1,4 +1,4 @@
-class Sensors:
+class Sensor:
     def __init__ (self, id, is_active=False, car_park=None):
         self.id=id
         self.is_active=is_active
@@ -8,9 +8,9 @@ class Sensors:
         status = "active" if self.is_active else "inactive"
         return f"Sensor {self.id} ({status})"
 
-class ExitSensor:
+class ExitSensor(Sensor):
     pass
 
-class EntrySensor:
+class EntrySensor(Sensor):
     pass
 
