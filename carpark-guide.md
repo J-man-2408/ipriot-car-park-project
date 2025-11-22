@@ -1055,9 +1055,10 @@ We are going to do the latter:
 **Additional evidencing:**
 After you have merged your branch to main, push to your remote with the s10 tag. Add a screenshot of the GitHub repository after pushing the tag, showing the CarPark class with the new methods:
 
-```markdown
-![Added methods to the car park class](screenshots/methods-to-car-park.png)
-```
+
+![Added methods to the car park class](/images/methods-to-car-park-json.png)
+![Added methods to the car park class](/images/methods-to-car-park-json-2.png)
+
 
 ### 2.14. Final step: build a car park
 
@@ -1097,9 +1098,8 @@ In your final submission, you must include any files you created or modified. Th
 
 1. Add a screenshot of the output of the `main.py` file:
 
-   ```markdown
-   ![Main.py output](screenshots/main-py.png)
-   ```
+![Main.py output](/images/main-output.png)
+
 
 > Required for evidencing competency:
 
