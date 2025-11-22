@@ -72,6 +72,19 @@ class TestCarPark(unittest.TestCase):
       self.assertIn("NEW-001", last_line) # check plate entered
       self.assertIn("exited", last_line) # check description
       self.assertIn("\n", last_line,) # check entry has a new line
+      
+
+    # Config test
+    def test_init_from_config(self):
+        cp = CarPark("Somewhere", 50, log_file="logfile.txt")
+        cp.write_config()
+
+        loaded = CarPark.from_config()
+
+        self.assertEqual(cp.location, loaded.location)
+        self.assertEqual(cp.capacity, loaded.capacity)
+        self.assertEqual(str(cp.log_file), str(loaded.log_file))
+
 
 
 if __name__ == "__main__":
