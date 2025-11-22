@@ -160,7 +160,7 @@ Include a screenshot of your GitHub repository `src/` directory **after** you ha
    git tag -a "s1" -m "Added a constructor and attributes to the car park class"
    ```
 
-<!-- Up to here 5/11 -->
+<!-- Up to here 5/11/2025 -->
 #### 2.5.2. Display class
 
 1. Create an `__init__` method for the `Display` class. This method will be called when creating a new `Display` object. The method should accept the following parameters:
@@ -490,7 +490,7 @@ Answer the following questions:
    > Advantage: It's flexible, any number of information pieces can be added or removed without changed the update method signature. 
    > Disadvantage: Less structured, if keys are misspelled or wrong the displays may break and type checking becomes harder.  
 
-<!-- Up to here 21/11/2025 3.10 -->
+<!-- Up to here 21/11/2025 15:10 -->
 #### 2.7.5. Add a detect vehicle method to the Sensor class
 
 A sensor detects a vehicle, scans the plate, and notifies the car park. The Sensor class is specialized by the EntrySensor and ExitSensor classes. We will implement the `detect_vehicle` method in the `EntrySensor` and `ExitSensor` classes.
@@ -806,7 +806,7 @@ Finally, we'll create tests for the `Sensor` class. These tests will test the `_
 
 The car park register method should accept a `Sensor` (optional) or `Display` object. It should raise a `TypeError` if the object is neither a `Sensor` nor a `Display`. Before proceeding, think about where you would test this behaviour. Should you test it in the `CarPark` unit tests or the `Display`/`Sensor` unit tests? Why?
 
-> You should test this in the CarPark unit tests because the register method is defined in CarPark, not in Display or Sensor and unit tests should focus on the class that owns the functionality being tested.
+   > You should test this in the CarPark unit tests because the register method is defined in CarPark, not in Display or Sensor and unit tests should focus on the class that owns the functionality being tested.
 
 Create a new unit test in the `test_car_park.py` file called `test_register_raises_type_error`. This test should create a `CarPark` object and a `str` object. It should then call the `register` method on the `CarPark` object with the `str` object as a parameter. The test should assert that a `TypeError` is raised. Here is a sample implementation:
 
@@ -820,6 +820,7 @@ with self.assertRaises(TypeError):
 
 Commit your original test cases for the sensor class to the local repository. Tag the commit with `s8` so your lecturer can find it.
 
+<!-- Up to here 21/11/2025 18:39 -->
 ### 2.13. Additional functionality: TDD
 
 You have been asked to implement the following additional functionality:
