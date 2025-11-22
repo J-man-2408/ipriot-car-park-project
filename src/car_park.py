@@ -1,8 +1,11 @@
 from display import Display
 from sensors import Sensor
+from pathlib import Path
+from datetime import datetime
+
 
 class CarPark:
-    def __init__ (self, location="Unknown", capacity=0, plates=None, displays=None, sensors=None):
+    def __init__ (self, location="Unknown", capacity=0, plates=None, displays=None, sensors=None, log_file=Path("log.txt")):
         """
         Initializes a new CarPark object.
         
@@ -17,6 +20,8 @@ class CarPark:
         self.capacity = capacity
         self._plate = plates or []
         self.sensors=sensors or []
+        self.log_file = log_file if isinstance(log_file, Path) else Path(log_file)
+        self.log_file.touch(exist_ok=True)
         
     def __str__ (self):
         """
@@ -54,24 +59,26 @@ class CarPark:
         return max(0, self.capacity - len(self._plate))
     
     def add_car(self, plate):
-        if plate in self._plate:
-            print ("Car is already parked.")
+        if plate in self.plates:
+            print("Car is already parked.")
+            return
+
+        if len(self.plates) >= self.capacity:# Checks BEFORE adding
+            print("Car park is FULL!")
             return
         
-        if len (self._plate) >= self.capacity:
-            print ("Car park is FULL!")
-            return
-        
-        self._plate.append(plate)
+        self.plates.append(plate)
         self.update_displays()
-        print (f"Car {plate} added. {self.available_bays} bays remaining.")
+        self._log_car_activity(plate, "entered")
+        print(f"Car {plate} added. {self.available_bays} bays remaining.")
             
     def remove_car(self, plate):
-        if plate not in self._plate:
+        if plate not in self.plates:
             raise ValueError(f"Car {plate} was not found")
-        
-        self._plate.remove(plate)
+
+        self.plates.remove(plate)
         self.update_displays()
+        self._log_car_activity(plate, "exited")
         print(f"Car {plate} removed. {self.available_bays} bays remaining.")
     
     def update_displays (self):
@@ -81,4 +88,8 @@ class CarPark:
         }
         for display in self._display:
             display.update(data)
+    
+    def _log_car_activity(self, plate, action):
+      with self.log_file.open("a") as f:
+         f.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
                     
