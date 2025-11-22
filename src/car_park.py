@@ -1,5 +1,6 @@
 from display import Display
 from sensors import Sensor
+import json
 from pathlib import Path
 from datetime import datetime
 
@@ -92,4 +93,22 @@ class CarPark:
     def _log_car_activity(self, plate, action):
       with self.log_file.open("a") as f:
          f.write(f"{plate} {action} at {datetime.now():%Y-%m-%d %H:%M:%S}\n")
+         
+    
+    #json configuration
+    def write_config(self):
+        with Path("config.json").open("w") as f:
+            json.dump({
+                "location": self.location,
+                "capacity": self.capacity,
+                "log_file": str(self.log_file)
+            }, f)
+    
+    @classmethod
+    def from_config(cls, config_file=Path("config.json")):
+      config_file = config_file if isinstance(config_file, Path) else Path(config_file)
+      with config_file.open() as f:
+         config = json.load(f)
+      return cls(config["location"], config["capacity"], log_file=config["log_file"])
+
                     
