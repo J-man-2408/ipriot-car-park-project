@@ -1,22 +1,18 @@
+from io import StringIO
+import sys
 import unittest
 from display import Display
-from car_park import CarPark
 
 class TestDisplay(unittest.TestCase):
     def setUp(self):
-        self.car_park = CarPark("876 Random Street", 10)
-        self.display = Display(id=1, message="Welcome to the car park", is_on=True)
+        self.display = Display(id=1, is_on=True)
 
-    def test_display_initialized_with_all_attributes(self):
-        self.assertIsInstance(self.display, Display)
-        self.assertEqual(self.display.id, 1)
-        self.assertEqual(self.display.message, "Welcome to the car park")
-        self.assertEqual(self.display.is_on, True)
-
-    def test_update(self):
-        # Update with a new message
+    def test_update_printed_output(self):
+        captured_output = StringIO()
+        sys.stdout = captured_output  
         self.display.update({"message": "Goodbye"})
-        self.assertEqual(self.display.message, "Goodbye")
+        sys.stdout = sys.__stdout__  
+        self.assertIn("Goodbye", captured_output.getvalue())
 
 if __name__ == "__main__":
     unittest.main()

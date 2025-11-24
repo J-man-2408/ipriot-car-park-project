@@ -15,6 +15,8 @@ class Display:
         """
         Update display with data dictionary and print info.
         """
+        if "message" in data:
+            self.message = data["message"]
         for key, value in data.items():
             print(f"[Display {self.id}] {key}: {value}")
 
